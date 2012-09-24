@@ -15,8 +15,8 @@ class Avl
 		// class destructor
 		~Avl();
 		
-		bool buscar( string llave );
-		bool buscarEn( BinNode* n, string llave);
+		BinNode* buscar( string llave );
+		BinNode* buscarEn( BinNode* n, string llave);
 		void insertar( string key, int element );
 		void eliminar( string key );
 		

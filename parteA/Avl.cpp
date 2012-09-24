@@ -13,18 +13,18 @@ Avl::~Avl()
 	// insert your code here
 }
 
-bool Avl::buscar( string llave )
+BinNode* Avl::buscar( string llave )
 {
     return buscarEn( _root, llave);
 }
 
 
-bool Avl::buscarEn( BinNode* n, string llave )
+BinNode* Avl::buscarEn( BinNode* n, string llave )
 {
     //Caso en que le arbol no tiene nodos
     if ( _root == 0 )
     {
-        return false;
+        return 0;
     }
     
     //Caso en que la llave sea menor que la del nodo
@@ -42,7 +42,7 @@ bool Avl::buscarEn( BinNode* n, string llave )
     //Caso en que hayamos encontrado el nodo
     else
     {
-        return true;
+        return n;
     }
     
 }
