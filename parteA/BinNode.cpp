@@ -1,15 +1,9 @@
 #include "BinNode.h" // class's header file
 
-// class constructor
+// constructores
 BinNode::BinNode()
 {
 	_centinel = true;
-}
-
-// class destructor
-BinNode::~BinNode()
-{
-	// insert your code here
 }
 
 BinNode::BinNode( string key, int element)
@@ -18,13 +12,26 @@ BinNode::BinNode( string key, int element)
     _element = element;
     _left = new BinNode();
     _right = new BinNode();
+    _centinel = false;
 }
+
+// class destructor
+BinNode::~BinNode()
+{
+	// insert your code here
+}
+
 
 //getters y setters
 
 bool BinNode::getCentinel()
 {
     return _centinel;   
+}
+
+void BinNode::setCentinel( bool valor)
+{
+    _centinel = valor;
 }
 
 int BinNode::getElement()
@@ -65,6 +72,16 @@ BinNode* BinNode::getRight()
 void BinNode::setRight( BinNode* nodo)
 {
     _right = nodo;
+}
+
+BinNode* BinNode::getFather()
+{
+    return _father;
+}
+
+BinNode* BinNode::setFather( BinNode* nodo)
+{
+    _father = nodo;
 }
 
 

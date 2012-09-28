@@ -15,10 +15,18 @@ class Avl
 		// class destructor
 		~Avl();
 		
+		
 		BinNode* buscar( string llave );
 		BinNode* buscarEn( BinNode* n, string llave);
 		void insertar( string key, int element );
 		void eliminar( string key );
+		
+		void sortedDump();
+		void imprimir( BinNode* raiz );
+		
+		BinNode* getRoot();
+		
+		
 		
 		
 	private:

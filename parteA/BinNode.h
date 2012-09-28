@@ -7,11 +7,12 @@ using namespace std;
 class BinNode
 {
 	public:
-		// class constructor
+		// constructores
 		BinNode();
 		
 		BinNode( string key, int element);
-		// class destructor
+		
+        // class destructor
 		~BinNode();
 		
 		//getters y setters
@@ -30,10 +31,13 @@ class BinNode
 		BinNode* getRight();
 		void setRight( BinNode* nodo);
 		
+		BinNode* getFather();
+		BinNode* setFather( BinNode* nodo);
+		
 	private:
         BinNode* _left;
         BinNode* _right;
-        //BinNode* father;
+        BinNode* _father;
             
         int _element;
         string _key;

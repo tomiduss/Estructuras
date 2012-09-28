@@ -1,4 +1,5 @@
 #include "Avl.h" // class's header file
+#include <iostream>
 
 // class constructor
 Avl::Avl()
@@ -13,6 +14,11 @@ Avl::~Avl()
 	// insert your code here
 }
 
+BinNode* Avl::getRoot()
+{
+    return _root;
+}
+
 BinNode* Avl::buscar( string llave )
 {
     return buscarEn( _root, llave);
@@ -21,10 +27,10 @@ BinNode* Avl::buscar( string llave )
 
 BinNode* Avl::buscarEn( BinNode* n, string llave )
 {
-    //Caso en que le arbol no tiene nodos
-    if ( _root == 0 )
+    //Caso en que el nodo es un centinela 
+    if ( n->getCentinel()== true )
     {
-        return 0;
+        return n;
     }
     
     //Caso en que la llave sea menor que la del nodo
@@ -38,29 +44,57 @@ BinNode* Avl::buscarEn( BinNode* n, string llave )
     {
         return buscarEn( n->getRight(), llave );
     }
-    
-    //Caso en que hayamos encontrado el nodo
+    //Caso en que se encuentre exactamente el nodo
     else
     {
         return n;
     }
-    
 }
 
 
 void Avl::insertar( string key, int element)
 {
-    //Caso 1 nodo encontrado es un centinela
-    if( _root->getCentinel() == true )
+    BinNode* n = buscar( key );
+    
+    //si el nodo encontrado es un centinela
+    if( n->getCentinel() )
     {
-        _root->setKey(key);
-        _root->setElement(element);
-        _root->setLeft( new BinNode);
-        _root->setRight( new BinNode);
+        n->setCentinel(false);
+        n->setKey( key );
+        n->setElement(element);
+        n->setRight( new BinNode() );
+        n->setLeft( new BinNode() );
     }
-    //Caso 2 nodo es mayor que el valor a incertar
-    //else if()
-    //{
-    //}
-        
+    //si se encuentra el nodo exacto lo insertamos a la derecha de este
+    else
+    {
+        BinNode* aux = n->getRight();
+        n->setRight( new BinNode( key, element ) );
+        aux->setFather( n->getRight() );
+    }    
+}
+
+void Avl::sortedDump( )
+{
+	if( _root->getCentinel() == false)
+	{
+		cout << "arbol vacío" <<endl;
+	}
+	else
+	{
+        imprimir(_root);    
+    }
+}
+
+void Avl::imprimir( BinNode* raiz )
+{
+    if( raiz->getLeft()->getCentinel() == false)
+    {
+        imprimir( raiz->getLeft());
+    }
+    cout << raiz->getKey() << " " << raiz->getElement();
+    if( raiz->getRight()->getCentinel() == false)
+    {
+        imprimir( raiz->getRight());
+    }
 }
