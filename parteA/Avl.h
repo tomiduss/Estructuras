@@ -16,13 +16,13 @@ class Avl
 		~Avl();
 		
 		
-		BinNode* buscar( string llave );
-		BinNode* buscarEn( BinNode* n, string llave);
+		bool buscar( string llave );
+		
 		void insertar( string key, int element );
 		void eliminar( string key );
 		
 		void sortedDump();
-		void imprimir( BinNode* raiz );
+		
 		
 		BinNode* getRoot();
 		
@@ -30,6 +30,8 @@ class Avl
 		
 		
 	private:
+        void imprimir( BinNode* raiz );
+        BinNode* buscarEn( BinNode* n, string llave);
         BinNode* _root;
         int _nodesCount;
             

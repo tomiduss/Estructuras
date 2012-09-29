@@ -19,9 +19,11 @@ BinNode* Avl::getRoot()
     return _root;
 }
 
-BinNode* Avl::buscar( string llave )
-{
-    return buscarEn( _root, llave);
+bool Avl::buscar( string llave )
+{   
+    //Si el nodo encontrado es centinela retorno false.
+    //Si no, retorno true
+    return !buscarEn( _root, llave )->getCentinel();
 }
 
 
@@ -54,7 +56,7 @@ BinNode* Avl::buscarEn( BinNode* n, string llave )
 
 void Avl::insertar( string key, int element)
 {
-    BinNode* n = buscar( key );
+    BinNode* n = buscarEn( _root, key);
     
     //si el nodo encontrado es un centinela
     if( n->getCentinel() )
@@ -76,9 +78,10 @@ void Avl::insertar( string key, int element)
 
 void Avl::sortedDump( )
 {
-	if( _root->getCentinel() == false)
+    //caso en que el arbol este vacío
+	if( _root->getCentinel() == true)
 	{
-		cout << "arbol vacío" <<endl;
+		cout << "arbol vacio" <<endl;
 	}
 	else
 	{
@@ -88,11 +91,16 @@ void Avl::sortedDump( )
 
 void Avl::imprimir( BinNode* raiz )
 {
+    //Si el hijo izquierdo no es centinela recorro ese primero
     if( raiz->getLeft()->getCentinel() == false)
     {
         imprimir( raiz->getLeft());
     }
-    cout << raiz->getKey() << " " << raiz->getElement();
+    
+    //Imprimo el nodo actual
+    cout << raiz->getKey() << " " << raiz->getElement() << endl;
+    
+    //Si el hijo derecho no es centinela recorro ese sub-arbol
     if( raiz->getRight()->getCentinel() == false)
     {
         imprimir( raiz->getRight());

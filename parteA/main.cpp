@@ -34,6 +34,11 @@ int main(int argc, char *argv[])
         myfile.close();
     }
     
+    aux->sortedDump();
+    
+    //bool a = aux->buscar( "Henry" );
+    //cout << a << endl;
+    
     system("PAUSE");
     return EXIT_SUCCESS;
 }
