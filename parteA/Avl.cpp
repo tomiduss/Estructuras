@@ -58,9 +58,6 @@ void Avl::insertar( string key, int element)
         n->setKey( key );
         n->setElement(element);
         
-        //Ingreso el nivel del nodo nuevo
-        //n->setNivel( n->getFather()->getNivel()+1);
-        
         //Agrego nuevos Centinelas
         n->setRight( new BinNode() );
         n->getRight()->setFather( n );
@@ -68,6 +65,11 @@ void Avl::insertar( string key, int element)
         n->setLeft( new BinNode() );
         n->getLeft()->setFather( n );
     }
+    //Si se encuentra el nodo exacto actualizamos su información
+    else
+        n->setElement( element );
+    
+    //Por último balanceamos
     balancear( n );
     
 }
