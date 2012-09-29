@@ -32,13 +32,17 @@ class BinNode
 		void setRight( BinNode* nodo);
 		
 		BinNode* getFather();
-		BinNode* setFather( BinNode* nodo);
+		void setFather( BinNode* nodo);
+		
+		int getAltura();
+		void setAltura( int nivel );
 		
 	private:
         BinNode* _left;
         BinNode* _right;
         BinNode* _father;
             
+        int _altura;
         int _element;
         string _key;
         bool _centinel;

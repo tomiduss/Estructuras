@@ -4,6 +4,7 @@
 BinNode::BinNode()
 {
 	_centinel = true;
+	_altura = 0;
 }
 
 BinNode::BinNode( string key, int element)
@@ -13,6 +14,7 @@ BinNode::BinNode( string key, int element)
     _left = new BinNode();
     _right = new BinNode();
     _centinel = false;
+    _altura = 1;
 }
 
 // class destructor
@@ -79,9 +81,19 @@ BinNode* BinNode::getFather()
     return _father;
 }
 
-BinNode* BinNode::setFather( BinNode* nodo)
+void BinNode::setFather( BinNode* nodo)
 {
     _father = nodo;
+}
+
+int BinNode::getAltura()
+{
+    return _altura;
+}
+
+void BinNode::setAltura( int altura )
+{
+    _altura = altura;
 }
 
 

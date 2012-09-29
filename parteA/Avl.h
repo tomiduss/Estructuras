@@ -22,20 +22,20 @@ class Avl
 		void eliminar( string key );
 		
 		void sortedDump();
+		void prettyPrint();
 		
 		
 		BinNode* getRoot();
 		
-		
-		
-		
 	private:
         void imprimir( BinNode* raiz );
+        void imprimirBonito( BinNode* raiz);
+        
+        void balancear( BinNode* nodo );
+        
         BinNode* buscarEn( BinNode* n, string llave);
         BinNode* _root;
-        int _nodesCount;
-            
-            
+        int _nodesCount;    
 };
 
 #endif // AVL_H
