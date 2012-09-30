@@ -1,0 +1,167 @@
+#include "Treap.h" 
+#include <iostream>
+
+// class constructor
+Treap::Treap()
+{
+	_root = new BinNode();
+	_nodesCount = 0;
+}
+
+// class destructor
+Treap::~Treap()
+{
+	
+}
+
+BinNode* Treap::getRoot()
+{
+    return _root;
+}
+
+void Treap::insertar( string key, int priority, int element, BinNode* n)
+{
+    //Si el nodo encontrado es un centinela
+    if( n->getCentinel() == true)
+    {       
+        //Agrego los nuevos valores    
+        n->setKey( key );
+        n->setPriority( priority );
+        n->setElement( element );
+        n->setCentinel( false );
+        
+        //Agrego nuevos centinelas
+        n->setRight( new BinNode() );
+        n->getRight()->setFather( n );
+        
+        n->setLeft( new BinNode() );
+        n->getLeft()->setFather( n );
+    }
+    
+    else if( key < n->getKey() )
+    {
+        insertar( key, priority, element, n->getLeft());
+        if( n->getLeft()->getPriority() > n->getPriority() )
+            rotate_right( n );
+    }   
+    else if ( key > n->getKey() )
+    {
+        insertar( key, priority, element, n->getRight());
+        if( n->getRight()->getPriority() > n->getPriority() )
+            rotate_left( n );
+    }
+}
+
+void Treap::rotate_left( BinNode* raiz )
+{
+    BinNode* left = raiz->getLeft();
+    BinNode* right = raiz->getRight();
+    
+    //Guardo el padre del nodo y un aux
+    BinNode* aux = right->getLeft();
+    BinNode* padre = raiz->getFather();
+            
+    //Hago la rotación 
+    right->setLeft( raiz );
+    raiz->setFather( right );
+    raiz->setRight( aux );
+    aux->setFather( raiz );
+            
+    //Si el nodo era la raiz, simplemente hacemos que right sea la raiz del arbol
+    if( raiz == _root )
+        _root = right;
+                
+    //De lo contrario debemos averiguar donde iba el nodo y poner a right ahi
+    else
+    {
+        if( padre->getLeft() == raiz)
+            padre->setLeft( right );
+        else
+            padre->setRight( right );
+        right->setFather( padre );
+    }   
+}
+
+void Treap::rotate_right( BinNode* raiz )
+{
+    BinNode* left = raiz->getLeft();
+    BinNode* right = raiz->getRight();
+    
+    //Guardo el padre del nodo y un aux
+    BinNode* aux = left->getRight();
+    BinNode* padre = raiz->getFather();
+            
+    //Hago la rotación 
+    left->setRight( raiz );
+    raiz->setFather( left );
+    raiz->setLeft( aux );
+    aux->setFather( raiz );
+            
+    //Si el nodo era la raiz, simplemente hacemos que left sea la raiz del arbol
+    if( raiz == _root)
+    _root = left;
+                
+    //De lo contrario debemos averiguar donde iba el nodo y poner a left ahi
+    else
+    {
+        if( padre->getLeft() == raiz)
+            padre->setLeft( left );
+        else
+            padre->setRight( left );
+        left->setFather( padre );
+    }          
+}
+
+void Treap::sortedDump( )
+{
+    //caso en que el arbol este vacío
+	if( _root->getCentinel() == true)
+		cout << "arbol vacio" <<endl;
+	else
+        imprimir(_root);    
+}
+
+void Treap::imprimir( BinNode* raiz )
+{
+    //Si el hijo izquierdo no es centinela recorro ese primero
+    if( raiz->getLeft()->getCentinel() == false)
+        imprimir( raiz->getLeft());
+    
+    //Imprimo el nodo actual
+    cout << raiz->getKey() << " " << raiz->getElement()<< " "<< raiz->getPriority() << endl;
+    
+    //Si el hijo derecho no es centinela recorro ese sub-arbol
+    if( raiz->getRight()->getCentinel() == false)
+        imprimir( raiz->getRight());
+}
+
+
+bool Treap::buscar( string llave )
+{   
+    //Si el nodo encontrado es centinela retorno false.
+    //Si no, retorno true
+    return !buscarEn( _root, llave )->getCentinel();
+}
+
+BinNode* Treap::buscarEn( BinNode* n, string llave )
+{
+    //Caso en que el nodo es un centinela 
+    if ( n->getCentinel()== true )
+        return n;
+    
+    //Caso en que la llave sea menor que la del nodo
+    else if ( llave < n->getKey())
+        return buscarEn( n->getLeft(), llave);
+    
+    //Caso en que la llave es mayor que el nodo
+    else if ( llave > n->getKey())
+        return buscarEn( n->getRight(), llave );
+        
+    //Caso en que se encuentre exactamente el nodo
+    else
+        return n;
+}
+
+
+
+

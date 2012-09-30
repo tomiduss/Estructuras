@@ -1,4 +1,4 @@
-#include "Avl.h" // class's header file
+#include "Avl.h" 
 #include <iostream>
 
 // class constructor
@@ -71,7 +71,6 @@ void Avl::insertar( string key, int element)
     
     //Por último balanceamos
     balancear( n );
-    
 }
 
 void Avl::sortedDump( )
@@ -263,7 +262,7 @@ void Avl::balancear( BinNode* nodo )
         balancear( nodo->getFather() ); 
 }
 
-//incompleto
+
 void Avl::prettyPrint()
 {
     //caso en que el arbol este vacío
@@ -273,26 +272,30 @@ void Avl::prettyPrint()
 	}
 	else
 	{
-        imprimir(_root);    
+        imprimirBonito(_root, 0);    
     }
 }
 
 //incompleto no pescar
-void Avl::imprimirBonito( BinNode* raiz)
+void Avl::imprimirBonito( BinNode* raiz, int nivel)
 {
     //Si el hijo izquierdo no es centinela recorro ese primero
     if( raiz->getLeft()->getCentinel() == false)
     {
-        imprimir( raiz->getLeft());
+        imprimirBonito( raiz->getLeft(), nivel + 1);
     }
-    
-    //Imprimo el nodo actual
-    cout << raiz->getKey() << " " << raiz->getElement() << endl;
+        
+    //Imprimo los espacios
+    for( int i = 0; i < nivel; i++)
+    {
+        cout << "    ";
+    }
+    cout << "|-- " << raiz->getKey() << endl;
     
     //Si el hijo derecho no es centinela recorro ese sub-arbol
     if( raiz->getRight()->getCentinel() == false)
     {
-        imprimir( raiz->getRight());
+        imprimirBonito( raiz->getRight(), nivel + 1);
     }   
 }
 

@@ -37,12 +37,18 @@ class BinNode
 		int getAltura();
 		void setAltura( int nivel );
 		
+		int getPriority();
+		void setPriority( int priority );
+		
 	private:
         BinNode* _left;
         BinNode* _right;
         BinNode* _father;
             
         int _altura;
+        
+        int _priority;
+        
         int _element;
         string _key;
         bool _centinel;

@@ -5,8 +5,8 @@ CPP  = g++.exe
 CC   = gcc.exe
 WINDRES = windres.exe
 RES  = 
-OBJ  = main.o BinNode.o Avl.o $(RES)
-LINKOBJ  = main.o BinNode.o Avl.o $(RES)
+OBJ  = main.o BinNode.o Avl.o Treap.o $(RES)
+LINKOBJ  = main.o BinNode.o Avl.o Treap.o $(RES)
 LIBS =  -L"C:/Dev-Cpp/lib"  
 INCS =  -I"C:/Dev-Cpp/include" 
 CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include" 
@@ -34,3 +34,6 @@ BinNode.o: BinNode.cpp
 
 Avl.o: Avl.cpp
 	$(CPP) -c Avl.cpp -o Avl.o $(CXXFLAGS)
+
+Treap.o: Treap.cpp
+	$(CPP) -c Treap.cpp -o Treap.o $(CXXFLAGS)

@@ -96,4 +96,14 @@ void BinNode::setAltura( int altura )
     _altura = altura;
 }
 
+int BinNode::getPriority()
+{
+    return _priority;   
+}
+
+void BinNode::setPriority( int priority )
+{
+    _priority = priority;
+}
+
 
