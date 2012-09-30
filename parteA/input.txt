@@ -7,3 +7,10 @@ insert i 2
 delete a
 insert j 4
 insert k 7
+insert z 4
+insert n 7
+insert b 9
+insert r 1
+insert a 3
+insert w 8
+delete e

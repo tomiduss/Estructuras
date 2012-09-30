@@ -22,10 +22,11 @@ int main(int argc, char *argv[])
     cin >> output;
     
     //AVL
+    
     Avl* aux = new Avl();
     
     string line;
-          
+    /*      
     ifstream myfile(input.c_str());
     
     if (myfile.is_open())
@@ -41,15 +42,17 @@ int main(int argc, char *argv[])
             if( instruccion == "insert")
                 aux->insertar( key, 1);
             else if ( instruccion == "delete")
-                {}
+                aux->eliminar( key );
+            aux->prettyPrint();
+            cout << endl;
+            cout << endl;
         }
         myfile.close();
     }
     cout << "avl" << endl;
     aux->prettyPrint();
-    
-    
-    
+    */
+
     //Treap
     
     Treap* arbol = new Treap();
@@ -78,9 +81,6 @@ int main(int argc, char *argv[])
             { 
                  arbol->eliminar( arbol->getRoot(), key );
             }
-            arbol->prettyPrint();
-            cout << endl;
-            cout << endl;
         }
         myfile_2.close();
     }

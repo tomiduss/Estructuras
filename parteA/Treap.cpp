@@ -91,7 +91,9 @@ void Treap::insertar( string key, int element, BinNode* n)
 
 void Treap::eliminar( BinNode* root, string key)
 {
-    if( key < root->getKey())
+    if( root->getCentinel() == true )
+        return;
+    else if( key < root->getKey())
         eliminar( root->getLeft(), key);
     else if( key > root->getKey() )
         eliminar( root->getRight(), key);
@@ -103,10 +105,14 @@ void Treap::eliminar_root( BinNode* root )
 {
     if( root->getCentinel() == true )
     {
-        //Nada   
+        return;   
     }
     else if( (root->getLeft()->getCentinel() == true) && (root->getRight()->getCentinel() == true) )
+    {
         root->setCentinel( true );
+        delete root->getLeft();
+        delete root->getRight();
+    }
     else if( root->getLeft()->getCentinel() == true )
     {
         rotate_left(root);

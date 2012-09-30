@@ -75,6 +75,88 @@ void Avl::insertar( string key, int element)
 
 void Avl::eliminar( string key )
 {
+    //encuentro el nodo que se quiere eliminar
+    BinNode* raiz = buscarEn( _root, key );
+    
+    //si es centinela, nada que borrar
+    if( raiz->getCentinel() == true)
+        return;
+    
+    //si el nodo no tiene hijos, simplemente se borra
+    else if( (raiz->getLeft()->getCentinel() == true) && (raiz->getRight()->getCentinel() == true) )
+        raiz->setCentinel( true );
+    
+    //si tiene hijo izquierdo
+    else if( (raiz->getLeft()->getCentinel() == false) && (raiz->getRight()->getCentinel() == true) )
+    {
+        BinNode* left = raiz->getLeft();
+        BinNode* padre = raiz->getFather();
+        
+        //reemplazo el nodo por su hijo
+        if( padre->getLeft() == raiz)
+            padre->setLeft( left );
+        else
+            padre->setRight( left );
+        left->setFather( padre );
+        
+        //destruyo el nodo y su centinela
+        delete raiz->getRight();
+        delete raiz;
+    }
+    
+    //si tiene hijo derecho
+    else if( (raiz->getLeft()->getCentinel() == true) && (raiz->getRight()->getCentinel() == false) )
+    {
+        BinNode* right = raiz->getRight();
+        BinNode* padre = raiz->getFather();
+        
+        //reemplazo el nodo por su hijo
+        if( padre->getLeft() == raiz)
+            padre->setLeft( right );
+        else
+            padre->setRight( right );
+        right->setFather( padre );
+        
+        //destruyo el nodo y su centinela
+        delete raiz->getLeft();
+        delete raiz;
+    }
+    
+    else
+    {
+        //Busco el proximo inorden
+        BinNode* aux = raiz->getRight();
+        while( aux->getLeft()->getCentinel() == false )
+        {
+            aux = aux->getLeft();
+        } 
+        
+        //si existe guardo el hijo del nodo encontrado
+        BinNode* hijo = new BinNode();
+        if( aux->getLeft()->getCentinel() == false )
+            hijo = aux->getLeft();
+        else if( aux->getRight()->getCentinel() == false )
+            hijo = aux->getRight();
+            
+        //reemplazo el nodo por el encontrado
+        raiz->setAltura( aux->getAltura());
+        raiz->setElement( aux->getElement());
+        raiz->setKey( aux->getKey());
+        //raiz->setCentinel( aux->getKey());
+            
+        //destruyo el nodo encontrado
+        BinNode* padre = aux->getFather();
+        if( padre->getLeft() == aux)
+            padre->setLeft( hijo );
+        else
+            padre->setRight( hijo );
+        hijo->setFather( padre );
+        
+        //libero memoria
+        delete aux;
+    }
+    
+    balancear( raiz );
     
 }
 

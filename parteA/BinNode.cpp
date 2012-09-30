@@ -106,4 +106,14 @@ void BinNode::setPriority( int priority )
     _priority = priority;
 }
 
+BinNode& BinNode::operator= (const BinNode& param)
+{
+    _altura = param._altura;
+    //_priority = param.priority;
+    _element = param._element;
+    _key = param._key;
+    _centinel = param._centinel;
+    return *this;
+}
+
 

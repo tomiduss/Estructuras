@@ -24,7 +24,6 @@ class Avl
 		void sortedDump();
 		void prettyPrint();
 		
-		
 		BinNode* getRoot();
 		
 	private:

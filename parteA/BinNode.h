@@ -40,6 +40,8 @@ class BinNode
 		int getPriority();
 		void setPriority( int priority );
 		
+		BinNode& operator= (const BinNode& param);
+		
 	private:
         BinNode* _left;
         BinNode* _right;
