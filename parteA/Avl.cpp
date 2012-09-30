@@ -84,7 +84,13 @@ void Avl::eliminar( string key )
     
     //si el nodo no tiene hijos, simplemente se borra
     else if( (raiz->getLeft()->getCentinel() == true) && (raiz->getRight()->getCentinel() == true) )
+    {
         raiz->setCentinel( true );
+        raiz->setAltura( 0 );
+        delete raiz->getLeft();
+        delete raiz->getRight();
+        balancear( raiz->getFather() );
+    }
     
     //si tiene hijo izquierdo
     else if( (raiz->getLeft()->getCentinel() == false) && (raiz->getRight()->getCentinel() == true) )
@@ -102,6 +108,8 @@ void Avl::eliminar( string key )
         //destruyo el nodo y su centinela
         delete raiz->getRight();
         delete raiz;
+        
+         balancear( left->getFather() );
     }
     
     //si tiene hijo derecho
@@ -120,8 +128,11 @@ void Avl::eliminar( string key )
         //destruyo el nodo y su centinela
         delete raiz->getLeft();
         delete raiz;
+        
+         balancear( right->getFather() );
     }
     
+    //Si tiene dos hijos
     else
     {
         //Busco el proximo inorden
@@ -154,9 +165,9 @@ void Avl::eliminar( string key )
         
         //libero memoria
         delete aux;
+        
+        balancear( hijo->getFather() );
     }
-    
-    balancear( raiz );
     
 }
 

@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     Avl* aux = new Avl();
     
     string line;
-    /*      
+    
     ifstream myfile(input.c_str());
     
     if (myfile.is_open())
@@ -51,10 +51,10 @@ int main(int argc, char *argv[])
     }
     cout << "avl" << endl;
     aux->prettyPrint();
-    */
+    
 
     //Treap
-    
+    /*
     Treap* arbol = new Treap();
     line = "";
     
@@ -89,6 +89,7 @@ int main(int argc, char *argv[])
     
     cout << "Treap" << endl;
     arbol->prettyPrint();
+    */
     
     system("PAUSE");
     return EXIT_SUCCESS;
