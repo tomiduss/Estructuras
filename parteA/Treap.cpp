@@ -1,5 +1,6 @@
 #include "Treap.h" 
 #include <iostream>
+#include <time.h>
 
 // class constructor
 Treap::Treap()
@@ -51,6 +52,83 @@ void Treap::insertar( string key, int priority, int element, BinNode* n)
             rotate_left( n );
     }
 }
+
+void Treap::insertar( string key, int element, BinNode* n)
+{
+    //Si el nodo encontrado es un centinela
+    if( n->getCentinel() == true)
+    {   
+        srand ( time(NULL) );
+        int priority = rand() % 10000 + 1;
+            
+        //Agrego los nuevos valores    
+        n->setKey( key );
+        n->setPriority( priority );
+        n->setElement( element );
+        n->setCentinel( false );
+        
+        //Agrego nuevos centinelas
+        n->setRight( new BinNode() );
+        n->getRight()->setFather( n );
+        
+        n->setLeft( new BinNode() );
+        n->getLeft()->setFather( n );
+    }
+    
+    else if( key < n->getKey() )
+    {
+        insertar( key, element, n->getLeft());
+        if( n->getLeft()->getPriority() > n->getPriority() )
+            rotate_right( n );
+    }   
+    else if ( key > n->getKey() )
+    {
+        insertar( key, element, n->getRight());
+        if( n->getRight()->getPriority() > n->getPriority() )
+            rotate_left( n );
+    }
+}
+
+void Treap::eliminar( BinNode* root, string key)
+{
+    if( key < root->getKey())
+        eliminar( root->getLeft(), key);
+    else if( key > root->getKey() )
+        eliminar( root->getRight(), key);
+    else
+        eliminar_root(root);
+}
+
+void Treap::eliminar_root( BinNode* root )
+{
+    if( root->getCentinel() == true )
+    {
+        //Nada   
+    }
+    else if( (root->getLeft()->getCentinel() == true) && (root->getRight()->getCentinel() == true) )
+        root->setCentinel( true );
+    else if( root->getLeft()->getCentinel() == true )
+    {
+        rotate_left(root);
+        eliminar_root(root);
+    }
+    else if( root->getRight()->getCentinel() == true )
+    {
+        rotate_right(root);
+        eliminar_root(root);
+    }
+    else if( root->getLeft()->getPriority()> root->getRight()->getPriority())
+    {
+        rotate_right(root);
+        eliminar_root(root);
+    }
+    else
+    {
+        rotate_left(root);
+        eliminar_root(root);
+    }
+}
+
 
 void Treap::rotate_left( BinNode* raiz )
 {
@@ -183,8 +261,6 @@ void Treap::imprimirBonito( BinNode* raiz, int nivel, int* ramas, bool left)
         imprimirBonito( raiz->getRight(), nivel + 1, ramas, false);
     }   
 }
-
-
 
 bool Treap::buscar( string llave )
 {   

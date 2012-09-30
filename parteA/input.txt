@@ -1,0 +1,9 @@
+insert a 9
+insert c 1
+insert d 3
+insert f 6
+delete c
+insert i 2
+delete a
+insert j 4
+insert k 7

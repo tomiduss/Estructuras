@@ -73,6 +73,11 @@ void Avl::insertar( string key, int element)
     balancear( n );
 }
 
+void Avl::eliminar( string key )
+{
+    
+}
+
 void Avl::sortedDump( )
 {
     //caso en que el arbol este vacío
@@ -276,7 +281,7 @@ void Avl::prettyPrint()
     }
 }
 
-//incompleto no pescar
+
 void Avl::imprimirBonito( BinNode* raiz, int nivel, int* ramas, bool left)
 {
     //Si el hijo izquierdo no es centinela recorro ese primero

@@ -12,14 +12,21 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+    string input;
+    string output;
+    
+    cout << "indique el nombre del archivo de entrada" << endl;
+    cin >> input;
+    
+    cout << "indique el nombre del archivo de salida" << endl;
+    cin >> output;
+    
+    //AVL
     Avl* aux = new Avl();
     
     string line;
-    string nombre_archivo = "";
-    cout << "indique nombre del archivo" << endl;
-    cin >> nombre_archivo;
           
-    ifstream myfile(nombre_archivo.c_str());
+    ifstream myfile(input.c_str());
     
     if (myfile.is_open())
     {   
@@ -28,46 +35,59 @@ int main(int argc, char *argv[])
             getline (myfile,line);
             istringstream iss(line);
             string key;
-            int value;
+            string instruccion;
+            iss >> instruccion;
             iss >> key;
-            iss >> value;
-            aux->insertar( key, value);
+            if( instruccion == "insert")
+                aux->insertar( key, 1);
+            else if ( instruccion == "delete")
+                {}
         }
         myfile.close();
     }
-    aux->sortedDump();
-    aux->prettyPrint(); 
+    cout << "avl" << endl;
+    aux->prettyPrint();
     
+    
+    
+    //Treap
     
     Treap* arbol = new Treap();
     line = "";
-    nombre_archivo = "prueba.txt";
     
-    ifstream myfile_2(nombre_archivo.c_str());
+    ifstream myfile_2(input.c_str());
     
     if (myfile_2.is_open())
     {   
-        // initialize random seed: 
-        srand ( time(NULL) );
-        
         while ( myfile_2.good() )
         {
             getline (myfile_2,line);
             istringstream iss(line);
+            string instruccion;
             string key;
-            int value;
+            int priority;
+            string aux;
+            iss >> instruccion;
             iss >> key;
-            iss >> value;
+            iss >> aux;
+            priority = atoi(aux.c_str());
             
-            //genero la prioridad entre 1 y 100
-            int priority = rand() % 100 + 1;
-            
-            arbol->insertar( key, priority, value, arbol->getRoot());
+            if( instruccion == "insert")
+                arbol->insertar( key, priority, 1, arbol->getRoot());
+            else if( instruccion == "delete" )
+            { 
+                 arbol->eliminar( arbol->getRoot(), key );
+            }
+            arbol->prettyPrint();
+            cout << endl;
+            cout << endl;
         }
         myfile_2.close();
     }
+    cout << endl;
+    cout << endl;
     
-    arbol->sortedDump();
+    cout << "Treap" << endl;
     arbol->prettyPrint();
     
     system("PAUSE");

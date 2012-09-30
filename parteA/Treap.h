@@ -1,4 +1,3 @@
-
 #ifndef TREAP_H
 #define TREAP_H
 #include "BinNode.h"
@@ -15,10 +14,13 @@ class Treap
 		bool buscar( string llave );
 		
 		void insertar( string key, int priority, int element, BinNode* n );
-		void insertar( int element );
+		void insertar( string key, int element, BinNode* n );
 		
 		void sortedDump();
 		void prettyPrint();
+		
+		void eliminar( BinNode* root, string key );
+		void eliminar_root( BinNode* root );
 		
 		BinNode* getRoot();
 		
