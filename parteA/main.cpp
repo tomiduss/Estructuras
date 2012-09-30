@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     aux->sortedDump();
     aux->prettyPrint(); 
     
-    /*
+    
     Treap* arbol = new Treap();
     line = "";
     nombre_archivo = "prueba.txt";
@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
     }
     
     arbol->sortedDump();
-    */
+    arbol->prettyPrint();
     
     system("PAUSE");
     return EXIT_SUCCESS;

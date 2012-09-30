@@ -24,7 +24,7 @@ class Treap
 		
 	private:
         void imprimir( BinNode* raiz );
-        void imprimirBonito( BinNode* raiz);
+        void imprimirBonito( BinNode* raiz, int nivel, int* ramas, bool left);
         
         void rotate_right( BinNode* raiz );
         void rotate_left( BinNode* raiz );

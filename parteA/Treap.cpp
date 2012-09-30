@@ -135,6 +135,56 @@ void Treap::imprimir( BinNode* raiz )
         imprimir( raiz->getRight());
 }
 
+void Treap::prettyPrint()
+{
+    //caso en que el arbol este vacío
+	if( _root->getCentinel() == true)
+	{
+		cout << "arbol vacio" <<endl;
+	}
+	else
+	{
+        imprimirBonito(_root, 0, new int[100], true);    
+    }
+}
+
+//incompleto no pescar
+void Treap::imprimirBonito( BinNode* raiz, int nivel, int* ramas, bool left)
+{
+    //Si el hijo izquierdo no es centinela recorro ese primero
+    if( raiz->getLeft()->getCentinel() == false)
+    {
+        if ( left )
+            ramas[ nivel ] = 0;
+        else 
+            ramas[ nivel ] = 1;
+        imprimirBonito( raiz->getLeft(), nivel + 1, ramas, true);
+    }
+    
+    //Imprimo las ramas y los espacios
+    for( int i = 0; i < nivel; i++)
+    {
+        if( ramas[i] == 1 && i != 0)
+            cout << "|   ";
+        else
+            cout << "    ";
+    }
+    
+    //imprimo el nodo
+    cout << "|-- " << raiz->getKey() << endl;
+    
+    //Si el hijo derecho no es centinela recorro ese sub-arbol
+    if( raiz->getRight()->getCentinel() == false)
+    {
+        if ( left )
+            ramas[ nivel ] = 1;
+        else 
+            ramas[ nivel ] = 0;
+        imprimirBonito( raiz->getRight(), nivel + 1, ramas, false);
+    }   
+}
+
+
 
 bool Treap::buscar( string llave )
 {   
