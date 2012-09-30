@@ -272,30 +272,43 @@ void Avl::prettyPrint()
 	}
 	else
 	{
-        imprimirBonito(_root, 0);    
+        imprimirBonito(_root, 0, new int[100], true);    
     }
 }
 
 //incompleto no pescar
-void Avl::imprimirBonito( BinNode* raiz, int nivel)
+void Avl::imprimirBonito( BinNode* raiz, int nivel, int* ramas, bool left)
 {
     //Si el hijo izquierdo no es centinela recorro ese primero
     if( raiz->getLeft()->getCentinel() == false)
     {
-        imprimirBonito( raiz->getLeft(), nivel + 1);
+        if ( left )
+            ramas[ nivel ] = 0;
+        else 
+            ramas[ nivel ] = 1;
+        imprimirBonito( raiz->getLeft(), nivel + 1, ramas, true);
     }
-        
-    //Imprimo los espacios
+    
+    //Imprimo las ramas y los espacios
     for( int i = 0; i < nivel; i++)
     {
-        cout << "    ";
+        if( ramas[i] == 1 && i != 0)
+            cout << "|   ";
+        else
+            cout << "    ";
     }
+    
+    //imprimo el nodo
     cout << "|-- " << raiz->getKey() << endl;
     
     //Si el hijo derecho no es centinela recorro ese sub-arbol
     if( raiz->getRight()->getCentinel() == false)
     {
-        imprimirBonito( raiz->getRight(), nivel + 1);
+        if ( left )
+            ramas[ nivel ] = 1;
+        else 
+            ramas[ nivel ] = 0;
+        imprimirBonito( raiz->getRight(), nivel + 1, ramas, false);
     }   
 }
 

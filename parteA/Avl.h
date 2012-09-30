@@ -29,7 +29,7 @@ class Avl
 		
 	private:
         void imprimir( BinNode* raiz );
-        void imprimirBonito( BinNode* raiz, int nivel);
+        void imprimirBonito( BinNode* raiz, int nivel, int* ramas, bool left);
         
         void balancear( BinNode* nodo );
         
